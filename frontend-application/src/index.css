@@ -1,0 +1,63 @@
+/* source-sans-pro-regular - latin */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+    url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-sans-pro-v13-latin-regular.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-sans-pro-v13-latin-regular.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+}
+
+/* source-sans-pro-700 - latin */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+    url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-sans-pro-v13-latin-700.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-sans-pro-v13-latin-700.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+}
+
+/* source-serif-pro-regular - latin */
+@font-face {
+  font-family: "Source Serif Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Source Serif Pro"), local("SourceSerifPro-Regular"),
+    url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-serif-pro-v7-latin-regular.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-serif-pro-v7-latin-regular.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+}
+
+/* source-serif-pro-700 - latin */
+@font-face {
+  font-family: "Source Serif Pro";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"),
+    url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-serif-pro-v7-latin-700.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("//d1x3cbuht6sy0f.cloudfront.net/assets/fonts/source-serif-pro-v7-latin-700.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
