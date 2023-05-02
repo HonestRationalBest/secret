@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const SaleCardLink = styled(Link)`
+export const SaleCardWrapper = styled("div")`
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   background: #fff;
   border-radius: 4px;
@@ -41,4 +41,14 @@ export const TitleText = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+export const FavoriteButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #f47b20;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+  text-transform: uppercase;
 `;

@@ -40,5 +40,6 @@ export const ButtonWrapper = styled.div`
 
   & button {
     width: 200px;
+    cursor: pointer;
   }
 `

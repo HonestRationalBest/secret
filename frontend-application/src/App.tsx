@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, SaleDetails, SearchResults } from "./pages";
+import { Home, SaleDetails, SearchResults, Favorites } from "./pages";
 import { MainLayout } from "./layout/MainLayout";
 import { UserContext } from "./context/UserContext";
 import {
-  SearchContext,
-  searchInitialState,
-  searchReducer,
-} from "./context/SearchContext";
+  ItemsContext,
+  itemsInitialState,
+  itemsReducer,
+} from "./context/ItemsContext";
 
 export const App: React.FC = () => {
   const [userId, setUserId] = React.useState<string>(
     localStorage.getItem("SE_USER_ID") ?? ""
   );
-  const [state, dispatch] = React.useReducer(searchReducer, searchInitialState);
+  const [state, dispatch] = React.useReducer(itemsReducer, itemsInitialState);
 
   const handleSetUserId: (userId: string) => void = (userId) => {
     localStorage.setItem("SE_USER_ID", userId);
@@ -22,16 +22,17 @@ export const App: React.FC = () => {
 
   return (
     <UserContext.Provider value={{ userId, setUserId: handleSetUserId }}>
-      <SearchContext.Provider value={{ state, dispatch }}>
+      <ItemsContext.Provider value={{ state, dispatch }}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/sale/:id" element={<SaleDetails />} />
             <Route path="/search/:query" element={<SearchResults />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Route>
         </Routes>
-      </SearchContext.Provider>
+      </ItemsContext.Provider>
     </UserContext.Provider>
   );
 };

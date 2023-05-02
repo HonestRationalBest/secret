@@ -1,12 +1,34 @@
-import express from 'express';
+import "reflect-metadata";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { connectDB } from "./db";
+import { FavoriteResolver } from "./resolvers/FavoritesResolver";
 
-const app = express();
-const port = process.env.PORT || 3001;
+(async () => {
+  const app = express();
+  const port = process.env.PORT || 4000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+  try {
+    await connectDB();
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+    const schema = await buildSchema({
+      resolvers: [FavoriteResolver],
+      validate: false,
+    });
+
+    const apolloServer = new ApolloServer({ schema });
+
+    await apolloServer.start();
+
+    apolloServer.applyMiddleware({ app });
+
+    app.listen(port, () => {
+      console.log(
+        `🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`
+      );
+    });
+  } catch (error) {
+    console.error("Error starting server:", error);
+  }
+})();

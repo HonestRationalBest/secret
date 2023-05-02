@@ -8,8 +8,11 @@ import {
   Logo,
   StyledLink,
 } from "./MainLayout.styles";
+import { useUserContext } from "../context/UserContext";
 
 export const MainLayout: React.FC = (props) => {
+  const { userId } = useUserContext();
+
   return (
     <>
       <Header>
@@ -31,6 +34,11 @@ export const MainLayout: React.FC = (props) => {
             <li>
               <StyledLink to="/search/Berlin">Berlin</StyledLink>
             </li>
+            {userId && (
+              <li>
+                <StyledLink to="/favorites">Favorites</StyledLink>
+              </li>
+            )}
           </ul>
         </ContentContainer>
       </Header>

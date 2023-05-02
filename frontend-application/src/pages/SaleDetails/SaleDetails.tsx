@@ -2,14 +2,45 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchSale } from "../../utils/UseFetchSale";
 import DOMPurify from "dompurify";
-import { ButtonWrapper, ImageWrapper, SaleDetailHeader } from "./SaleDetails.styles";
+import {
+  ButtonWrapper,
+  ImageWrapper,
+  SaleDetailHeader,
+} from "./SaleDetails.styles";
 import { Button, LoadingSpinner } from "../../components";
+import { ActionTypes, useItemsContext } from "../../context/ItemsContext";
+import { useUserContext } from "../../context/UserContext";
 
 export const SaleDetails: React.FC = () => {
   const params = useParams();
   const id: string = params.id ?? "";
   const { loading, error, sale } = useFetchSale({ saleId: id });
-  const [isFavorite, setIsFavorite] = React.useState(false)
+  const {
+    state: { favorites },
+    dispatch,
+  } = useItemsContext();
+  const { userId } = useUserContext();
+
+  const isInFavorites = () => {
+    return favorites[userId] && favorites[userId].some((favorite) => favorite.id === id);
+  };
+
+  const [isFavorite, setIsFavorite] = React.useState(isInFavorites());
+
+  const handleAddToFavorite = () => {
+    if (isFavorite) {
+      dispatch({
+        type: ActionTypes.REMOVE_FROM_FAVORITES,
+        payload: { userId, sale: { ...sale, id } },
+      });
+    } else {
+      dispatch({
+        type: ActionTypes.ADD_TO_FAVORITES,
+        payload: { userId, sale: { ...sale, id } },
+      });
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <div>
@@ -27,9 +58,13 @@ export const SaleDetails: React.FC = () => {
           <ImageWrapper>
             <img src={sale.photos?.[0].url} alt={sale.editorial?.title} />
           </ImageWrapper>
-          <ButtonWrapper>
-            <Button>{isFavorite ? "Add to favorite" : "Remove from favorite"}</Button>
-          </ButtonWrapper>
+          {userId && (
+            <ButtonWrapper>
+              <Button onClick={handleAddToFavorite}>
+                {isFavorite ? "Remove from favorite" : "Add to favorite"}
+              </Button>
+            </ButtonWrapper>
+          )}
           {sale.editorial.hotelDetails && (
             <article
               dangerouslySetInnerHTML={{

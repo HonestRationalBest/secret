@@ -1,4 +1,4 @@
-import { Context, createContext } from "react";
+import { Context, createContext, useContext } from "react";
 
 interface IUserContext {
   userId: string;
@@ -9,3 +9,5 @@ export const UserContext: Context<IUserContext> = createContext({
   userId: "",
   setUserId: (_userId) => {},
 });
+
+export const useUserContext = () => useContext(UserContext);

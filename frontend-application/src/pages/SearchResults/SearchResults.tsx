@@ -7,7 +7,7 @@ import {
   SearchResultsContainer,
   SearchResultsHeader,
 } from "./SearchResults.styles";
-import { useSearchContext } from "../../context/SearchContext";
+import { ActionTypes, useItemsContext } from "../../context/ItemsContext";
 
 export const SearchResults: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -21,13 +21,15 @@ export const SearchResults: React.FC = () => {
   const {
     state: { searchResponse },
     dispatch,
-  } = useSearchContext(); 
+  } = useItemsContext();
 
   React.useEffect(() => {
     if (response) {
-      dispatch({ type: "SET_SEARCH_RESPONSE", payload: response });
+      dispatch({ type: ActionTypes.SET_SEARCH_RESPONSE, payload: response });
     }
   }, [response, dispatch]);
+
+  console.log(searchResponse)
 
   return (
     <div>
