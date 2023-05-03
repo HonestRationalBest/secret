@@ -8,7 +8,7 @@ import {
   SearchResultsHeader,
 } from "./SearchResults.styles";
 import { ActionTypes, useItemsContext } from "../../context/ItemsContext";
-import { useFavorites } from "../../hooks/useFavorites";
+import { useGetFavorites } from "../../hooks/useGetFavorites";
 
 export const SearchResults: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -30,8 +30,7 @@ export const SearchResults: React.FC = () => {
     }
   }, [response, dispatch]);
 
-  const { handleToggleFavorite, userId } =
-    useFavorites();
+  useGetFavorites();
 
   return (
     <div>
