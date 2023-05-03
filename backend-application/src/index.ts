@@ -3,7 +3,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
-import { FavoriteResolver } from "./resolvers/FavoritesResolver";
+import { FavoriteResolver } from "./FavoritesResolver";
 
 import { connectDB } from "./db";
 

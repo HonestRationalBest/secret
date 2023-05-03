@@ -1,7 +1,7 @@
 import { Arg, Query, Mutation, Resolver } from "type-graphql";
 
-import { Favorite } from "../entities/Favorite";
-import { FavoriteModel } from "../models/FavoriteModel";
+import { Favorite } from "./Favorite";
+import { FavoriteModel } from "./FavoriteModel";
 
 @Resolver()
 export class FavoriteResolver {
