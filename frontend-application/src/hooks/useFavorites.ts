@@ -1,20 +1,28 @@
 import * as React from "react";
 
-import { ActionTypes, useItemsContext } from "../context/ItemsContext";
+import { ActionTypes, useItemsContext } from "../context/items/ItemsContext";
 import { useUserContext } from "../context/UserContext";
 import { client } from "../apolloClient";
 import { CREATE_FAVORITE, REMOVE_FAVORITE } from "../utils/queries/favorites";
 import { useFetchSale } from "../utils/UseFetchSale";
+import { ISale } from "../utils/Sale.interface";
 
-export const useFavorites = (id: string) => {
+interface UseFavoritesReturnType {
+  handleToggleFavorite: () => Promise<void>;
+  isFavorite: boolean;
+  loading: boolean;
+  error: Error | undefined;
+  sale: ISale | undefined;
+  userId: string | null;
+}
+
+export const useFavorites = (id: string): UseFavoritesReturnType => {
   const {
     state: { favorites },
     dispatch,
   } = useItemsContext();
-
-  const { loading, error, sale } = useFetchSale({ saleId: id });
-
   const { userId } = useUserContext();
+  const { loading, error, sale } = useFetchSale({ saleId: id });
 
   const isInFavorites = React.useMemo(
     () => favorites[userId]?.some((favorite) => favorite.id === id) ?? false,

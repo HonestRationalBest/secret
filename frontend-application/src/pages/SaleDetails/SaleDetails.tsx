@@ -1,19 +1,23 @@
 import * as React from "react";
 import DOMPurify from "dompurify";
+import { useParams } from "react-router-dom";
+
+import { Button, LoadingSpinner } from "../../components";
+import { useFavorites } from "../../hooks/useFavorites";
+import { useGetFavorites } from "../../hooks/useGetFavorites";
+import { useUserContext } from "../../context/UserContext";
+
 import {
   ButtonWrapper,
   ImageWrapper,
   SaleDetailHeader,
 } from "./SaleDetails.styles";
-import { Button, LoadingSpinner } from "../../components";
-import { useFavorites } from "../../hooks/useFavorites";
-import { useGetFavorites } from "../../hooks/useGetFavorites";
-import { useParams } from "react-router-dom";
 
 export const SaleDetails: React.FC = () => {
   const params = useParams();
   const id: string = params.id ?? "";
-  const { handleToggleFavorite, isFavorite, loading, error, sale, userId } =
+  const { userId } = useUserContext();
+  const { handleToggleFavorite, isFavorite, loading, error, sale } =
     useFavorites(id);
 
   useGetFavorites();

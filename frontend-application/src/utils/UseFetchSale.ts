@@ -1,4 +1,5 @@
 import { DocumentNode, gql, useQuery } from "@apollo/client";
+
 import { ISale } from "./Sale.interface";
 
 interface IUseFetchSaleProps {

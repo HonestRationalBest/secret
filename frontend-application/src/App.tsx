@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import { Home, SaleDetails, SearchResults, Favorites } from "./pages";
 import { MainLayout } from "./layout/MainLayout";
 import { UserContext } from "./context/UserContext";
@@ -7,7 +8,7 @@ import {
   ItemsContext,
   itemsInitialState,
   itemsReducer,
-} from "./context/ItemsContext";
+} from "./context/items/ItemsContext";
 
 export const App: React.FC = () => {
   const [userId, setUserId] = React.useState<string>(

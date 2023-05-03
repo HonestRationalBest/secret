@@ -1,6 +1,12 @@
 import React, { createContext, useContext } from "react";
-import { ISearchResponse } from "../utils/UseSearch";
-import { IBasicSale } from "../utils/Sale.interface";
+import { ISearchResponse } from "../../utils/UseSearch";
+import { IBasicSale } from "../../utils/Sale.interface";
+import {
+  IAddToFavoritesAction,
+  IRemoveFromFavoritesAction,
+  ISetFavoritesFetchedAction,
+  ISetSearchResponseAction,
+} from "./itemsInterfaces";
 
 export enum ActionTypes {
   SET_SEARCH_RESPONSE = "SET_SEARCH_RESPONSE",
@@ -19,36 +25,6 @@ interface IState {
   };
 }
 
-interface IAddToFavoritesPayload {
-  userId: string;
-  sale: IBasicSale;
-}
-
-interface ISetFavoritesFetchedPayload {
-  userId: string;
-  status: boolean;
-}
-
-interface ISetSearchResponseAction {
-  type: ActionTypes.SET_SEARCH_RESPONSE;
-  payload: ISearchResponse;
-}
-
-interface IAddToFavoritesAction {
-  type: ActionTypes.ADD_TO_FAVORITES;
-  payload: IAddToFavoritesPayload;
-}
-
-interface IRemoveFromFavoritesAction {
-  type: ActionTypes.REMOVE_FROM_FAVORITES;
-  payload: IAddToFavoritesPayload;
-}
-
-interface ISetFavoritesFetchedAction {
-  type: ActionTypes.SET_FAVORITES_FETCHED;
-  payload: ISetFavoritesFetchedPayload;
-}
-
 type IAction =
   | ISetSearchResponseAction
   | IAddToFavoritesAction
@@ -58,7 +34,7 @@ type IAction =
 export const itemsInitialState: IState = {
   searchResponse: null,
   favorites: {},
-  favoritesFetched: {}
+  favoritesFetched: {},
 };
 
 export const itemsReducer = (state: IState, action: IAction): IState => {

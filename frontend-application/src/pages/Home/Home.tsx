@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { SearchForm } from "../../components";
 import { HomePageWrapper } from "./Home.styles";
 

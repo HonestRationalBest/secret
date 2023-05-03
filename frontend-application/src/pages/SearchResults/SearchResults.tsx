@@ -1,14 +1,16 @@
 import * as React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+
 import { Button, LoadingSpinner, SaleCard, SearchForm } from "../../components";
 import { useSearch } from "../../utils/UseSearch";
+import { ActionTypes, useItemsContext } from "../../context/items/ItemsContext";
+import { useGetFavorites } from "../../hooks/useGetFavorites";
+
 import {
   LoadMoreWrapper,
   SearchResultsContainer,
   SearchResultsHeader,
 } from "./SearchResults.styles";
-import { ActionTypes, useItemsContext } from "../../context/ItemsContext";
-import { useGetFavorites } from "../../hooks/useGetFavorites";
 
 export const SearchResults: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -23,14 +25,13 @@ export const SearchResults: React.FC = () => {
     state: { searchResponse },
     dispatch,
   } = useItemsContext();
+  useGetFavorites();
 
   React.useEffect(() => {
     if (response) {
       dispatch({ type: ActionTypes.SET_SEARCH_RESPONSE, payload: response });
     }
   }, [response, dispatch]);
-
-  useGetFavorites();
 
   return (
     <div>

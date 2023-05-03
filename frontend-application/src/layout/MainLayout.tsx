@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
+
 import { LoginButton } from "../components";
+import { useUserContext } from "../context/UserContext";
+
 import {
   ContentContainer,
   FlexWrapper,
@@ -8,7 +11,6 @@ import {
   Logo,
   StyledLink,
 } from "./MainLayout.styles";
-import { useUserContext } from "../context/UserContext";
 
 export const MainLayout: React.FC = (props) => {
   const { userId } = useUserContext();

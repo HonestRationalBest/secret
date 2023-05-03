@@ -1,4 +1,10 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+
+import { IBasicSale } from "../../utils/Sale.interface";
+import { useFavorites } from "../../hooks/useFavorites";
+import { useUserContext } from "../../context/UserContext";
+
 import {
   SaleCardWrapper,
   SaleCardContent,
@@ -6,16 +12,14 @@ import {
   TitleText,
   FavoriteButton,
 } from "./SaleCard.styles";
-import { IBasicSale } from "../../utils/Sale.interface";
-import { Link } from "react-router-dom";
-import { useFavorites } from "../../hooks/useFavorites";
 
 export interface ISaleCardProps {
   sale: IBasicSale;
 }
 
 export const SaleCard: React.FC<ISaleCardProps> = ({ sale }) => {
-  const { handleToggleFavorite, isFavorite, userId } = useFavorites(sale.id);
+  const { userId } = useUserContext();
+  const { handleToggleFavorite, isFavorite } = useFavorites(sale.id);
 
   return (
     <SaleCardWrapper>
@@ -30,7 +34,7 @@ export const SaleCard: React.FC<ISaleCardProps> = ({ sale }) => {
         <DestenationText>{sale?.editorial?.destinationName}</DestenationText>
         <TitleText>{sale?.editorial?.title}</TitleText>
         {userId && (
-          <FavoriteButton onClick={() => handleToggleFavorite()}>
+          <FavoriteButton onClick={handleToggleFavorite}>
             {isFavorite ? "Remove from favorites" : "Add to favorites"}
           </FavoriteButton>
         )}

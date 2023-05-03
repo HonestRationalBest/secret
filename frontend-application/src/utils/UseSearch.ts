@@ -1,5 +1,6 @@
+import * as React from "react";
 import { DocumentNode, gql, useQuery } from "@apollo/client";
-import { useState } from "react";
+
 import { IBasicSale } from "./Sale.interface";
 
 export interface ISearchResponse {
@@ -42,8 +43,8 @@ export const useSearch: (props: IUseSearchProps) => IUseSearch = ({
   query,
   pageSize = DEFAULT_PAGE_SIZE,
 }) => {
-  const [offset, setOffset] = useState<number>(0);
-  const [currentQuery, setCurrentQuery] = useState<string>(query);
+  const [offset, setOffset] = React.useState<number>(0);
+  const [currentQuery, setCurrentQuery] = React.useState<string>(query);
 
   if (query !== currentQuery) {
     setOffset(0);

@@ -1,5 +1,5 @@
 import { LoadingSpinner, SaleCard } from "../../components";
-import { useItemsContext } from "../../context/ItemsContext";
+import { useItemsContext } from "../../context/items/ItemsContext";
 import { useUserContext } from "../../context/UserContext";
 import {
   SearchResultsContainer,
