@@ -35,7 +35,10 @@ interface IRemoveFromFavoritesAction {
   payload: IAddToFavoritesPayload;
 }
 
-type IAction = ISetSearchResponseAction | IAddToFavoritesAction | IRemoveFromFavoritesAction;
+type IAction =
+  | ISetSearchResponseAction
+  | IAddToFavoritesAction
+  | IRemoveFromFavoritesAction;
 
 export const itemsInitialState: IState = {
   searchResponse: null,
@@ -48,6 +51,16 @@ export const itemsReducer = (state: IState, action: IAction): IState => {
       return { ...state, searchResponse: action.payload as ISearchResponse };
     case ActionTypes.ADD_TO_FAVORITES:
       const userId = action.payload.userId;
+      const saleToAdd = action.payload.sale;
+
+      const existingFavorites = state.favorites[userId] || [];
+      const isSaleAlreadyFavorite = existingFavorites.some(
+        (favorite) => favorite.id === saleToAdd.id
+      );
+      if (isSaleAlreadyFavorite) {
+        return state;
+      }
+
       const newFavorites = state.favorites[userId]
         ? [...state.favorites[userId], action.payload.sale]
         : [action.payload.sale];

@@ -16,8 +16,22 @@ export class FavoriteResolver {
     @Arg("itemId") itemId: string,
     @Arg("userId") userId: string
   ): Promise<Favorite> {
-    const favorite = new FavoriteModel({ itemId, user: userId });
+    const existingFavorite = await FavoriteModel.findOne({ itemId, userId });
+    if (existingFavorite) {
+      return existingFavorite;
+    }
+
+    const favorite = new FavoriteModel({ itemId, userId });
     await favorite.save();
     return favorite;
+  }
+
+  @Mutation(() => Boolean)
+  async removeFavorite(
+    @Arg("itemId") itemId: string,
+    @Arg("userId") userId: string
+  ): Promise<boolean> {
+    const result = await FavoriteModel.deleteOne({ itemId, userId });
+    return result.deletedCount === 1;
   }
 }
