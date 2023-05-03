@@ -6,13 +6,16 @@ import { useUserContext } from "../context/UserContext";
 
 export const useGetFavorites = () => {
   const {
-    state: { favorites },
+    state: { favorites, favoritesFetched },
     dispatch,
   } = useItemsContext();
   const { userId } = useUserContext();
 
   React.useEffect(() => {
-    if (!favorites[userId] || favorites[userId].length === 0) {
+    if (
+      (!favorites[userId] || favorites[userId].length === 0) &&
+      !favoritesFetched[userId]
+    ) {
       client
         .query({
           query: GET_FAVORITES,
@@ -25,7 +28,11 @@ export const useGetFavorites = () => {
               payload: { userId, sale: { ...item, id: item.itemId } },
             });
           });
+          dispatch({
+            type: ActionTypes.SET_FAVORITES_FETCHED,
+            payload: { userId, status: true },
+          });
         });
     }
-  }, [dispatch, userId, favorites]);
+  }, [dispatch, userId, favorites, favoritesFetched]);
 };

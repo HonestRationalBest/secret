@@ -1,4 +1,3 @@
-import React from "react";
 import { LoadingSpinner, SaleCard } from "../../components";
 import { useItemsContext } from "../../context/ItemsContext";
 import { useUserContext } from "../../context/UserContext";
@@ -15,10 +14,10 @@ export const Favorites: React.FC = () => {
     state: { favorites },
   } = useItemsContext();
   const { userId } = useUserContext();
+  useGetFavorites();
 
   const favoriteIds = favorites[userId]?.map((favorite) => favorite.id) ?? [];
 
-  useGetFavorites();
   const { loading, error, favoriteSales } = useFetchFavorites(favoriteIds);
 
   return (

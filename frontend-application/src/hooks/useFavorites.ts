@@ -54,13 +54,19 @@ export const useFavorites = (id: string) => {
 
   const handleToggleFavorite = async () => {
     if (isFavorite) {
-      removeFavorite();
-      setIsFavorite(false);
+      removeFavorite().then(() => {
+        setIsFavorite(false);
+      });
     } else {
-      addFavorite();
-      setIsFavorite(true);
+      addFavorite().then(() => {
+        setIsFavorite(true);
+      });
     }
   };
+
+  React.useEffect(() => {
+    setIsFavorite(isInFavorites);
+  }, [isInFavorites]);
 
   return {
     handleToggleFavorite,

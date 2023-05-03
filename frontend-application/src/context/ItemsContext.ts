@@ -6,6 +6,7 @@ export enum ActionTypes {
   SET_SEARCH_RESPONSE = "SET_SEARCH_RESPONSE",
   ADD_TO_FAVORITES = "ADD_TO_FAVORITES",
   REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES",
+  SET_FAVORITES_FETCHED = "SET_FAVORITES_FETCHED",
 }
 
 interface IState {
@@ -13,11 +14,19 @@ interface IState {
   favorites: {
     [userId: string]: Array<IBasicSale>;
   };
+  favoritesFetched: {
+    [userId: string]: boolean;
+  };
 }
 
 interface IAddToFavoritesPayload {
   userId: string;
   sale: IBasicSale;
+}
+
+interface ISetFavoritesFetchedPayload {
+  userId: string;
+  status: boolean;
 }
 
 interface ISetSearchResponseAction {
@@ -35,14 +44,21 @@ interface IRemoveFromFavoritesAction {
   payload: IAddToFavoritesPayload;
 }
 
+interface ISetFavoritesFetchedAction {
+  type: ActionTypes.SET_FAVORITES_FETCHED;
+  payload: ISetFavoritesFetchedPayload;
+}
+
 type IAction =
   | ISetSearchResponseAction
   | IAddToFavoritesAction
-  | IRemoveFromFavoritesAction;
+  | IRemoveFromFavoritesAction
+  | ISetFavoritesFetchedAction;
 
 export const itemsInitialState: IState = {
   searchResponse: null,
   favorites: {},
+  favoritesFetched: {}
 };
 
 export const itemsReducer = (state: IState, action: IAction): IState => {
@@ -76,6 +92,14 @@ export const itemsReducer = (state: IState, action: IAction): IState => {
       return {
         ...state,
         favorites: { ...state.favorites, [userIdToRemove]: filteredFavorites },
+      };
+    case ActionTypes.SET_FAVORITES_FETCHED:
+      return {
+        ...state,
+        favoritesFetched: {
+          ...state.favoritesFetched,
+          [action.payload.userId]: action.payload.status,
+        },
       };
     default:
       return state;
