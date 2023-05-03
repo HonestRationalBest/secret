@@ -8,10 +8,13 @@ import {
 import { Button, LoadingSpinner } from "../../components";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useGetFavorites } from "../../hooks/useGetFavorites";
+import { useParams } from "react-router-dom";
 
 export const SaleDetails: React.FC = () => {
+  const params = useParams();
+  const id: string = params.id ?? "";
   const { handleToggleFavorite, isInFavorites, loading, error, sale, userId } =
-    useFavorites();
+    useFavorites(id);
 
   useGetFavorites();
 

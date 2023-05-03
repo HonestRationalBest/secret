@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
 
 import { ActionTypes, useItemsContext } from "../context/ItemsContext";
 import { useUserContext } from "../context/UserContext";
@@ -7,13 +6,12 @@ import { client } from "../apolloClient";
 import { CREATE_FAVORITE, REMOVE_FAVORITE } from "../utils/queries/favorites";
 import { useFetchSale } from "../utils/UseFetchSale";
 
-export const useFavorites = () => {
+export const useFavorites = (id: string) => {
   const {
     state: { favorites },
     dispatch,
   } = useItemsContext();
-  const params = useParams();
-  const id: string = params.id ?? "";
+
 
   const { loading, error, sale } = useFetchSale({ saleId: id });
 
