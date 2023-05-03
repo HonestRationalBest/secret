@@ -28,16 +28,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - `.env` contains URL for Sparrow graphql API
 - `index.tsx` is where the application is set up, including the configuration of Apollo client
 - `App.tsx` is the root of the application, and where URL routing is configured
-- `UserContext` is set up in `App`, this means you can access the user ID in any component via this context
 - `pages` directory contains the top-level components which form the contents of each page
 - `components` directory contains other reusable components
 - `layout` contains the main layout for the page including menu bar
 - `utils` contains helper functions to perform data fetching
+- `hooks` contains useful hooks that are used in the application to separate logic
+- `context` contains context for the user login system and for items throughout the entire application
 
 ## Backend application
 
-The `backend-application` directory is a placeholder for your new microservice. Please update this section of the read me with instructions on how to run the service.
+From the `backend-application` directory run command `npm i` it will install all dependencies
+
+### To start the application
+
+From the `frontend-application` directory run `npm start`
 
 ## Implementation Comments
 
-Please add any comments on choices you have made, any missed functionally or known bugs and what you would improve or do differently given more time if you were to make this solution production-ready.
+Back-end:
+Firstly, i thought between GraphQL and REST API. I like them both, but I decided to choose a GraphQL API because an existing microservice (yours, to handle sales) is already written using this API. I thought that it would better to use one API style in the front-end.
+
+Front-end:
+In my implementation, I used the context to store my favorites and made requests everywhere they were needed (on the SaleDetails and SearchResults pages) to save data and update the context. On the Favorites page, I used two queries - the first one from my back-end, and the second one from yours - and saved the results to the context as well. I didn't refactor many of the existing components since the task mentioned that I shouldn't. To separate logic, I used hooks as I consider it a good practice. In general, the project now looks as I expected.
+
+If you have any question feel free to ask me. 
