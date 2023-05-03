@@ -2,8 +2,10 @@ import "reflect-metadata";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { connectDB } from "./db";
+
 import { FavoriteResolver } from "./resolvers/FavoritesResolver";
+
+import { connectDB } from "./db";
 
 (async () => {
   const app = express();
@@ -11,16 +13,13 @@ import { FavoriteResolver } from "./resolvers/FavoritesResolver";
 
   try {
     await connectDB();
-
     const schema = await buildSchema({
       resolvers: [FavoriteResolver],
       validate: false,
     });
 
     const apolloServer = new ApolloServer({ schema });
-
     await apolloServer.start();
-
     apolloServer.applyMiddleware({ app });
 
     app.listen(port, () => {

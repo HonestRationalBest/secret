@@ -1,6 +1,6 @@
-import { prop as Property } from "@typegoose/typegoose";
-import { Field, ObjectType, ID } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import { ObjectId } from "mongodb";
+import { prop as Property } from "@typegoose/typegoose";
 
 @ObjectType({ description: "The Favorite model" })
 export class Favorite {

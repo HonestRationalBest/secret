@@ -1,8 +1,7 @@
 import { Arg, Query, Mutation, Resolver } from "type-graphql";
-import { getModelForClass } from "@typegoose/typegoose";
-import { Favorite } from "../entities/Favorite";
 
-const FavoriteModel = getModelForClass(Favorite);
+import { Favorite } from "../entities/Favorite";
+import { FavoriteModel } from "../models/FavoriteModel";
 
 @Resolver()
 export class FavoriteResolver {
