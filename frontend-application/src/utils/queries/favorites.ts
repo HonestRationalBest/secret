@@ -25,3 +25,20 @@ export const GET_FAVORITES = gql`
     }
   }
 `;
+
+export const GET_FAVORITE_SALES = gql`
+  query GetFavoriteSales($saleIds: [String]!) {
+    saleSearch(saleIds: $saleIds) {
+      sales {
+        id
+        editorial {
+          title
+          destinationName
+        }
+        photos {
+          url
+        }
+      }
+    }
+  }
+`;

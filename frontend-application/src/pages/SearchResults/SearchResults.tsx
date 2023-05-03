@@ -47,8 +47,8 @@ export const SearchResults: React.FC = () => {
             {searchResponse?.resultCount !== 1 ? "results" : "result"}
           </h4>
           <SearchResultsContainer>
-            {searchResponse?.sales?.map((s, i) => (
-              <SaleCard key={i} sale={s} />
+            {searchResponse?.sales?.map((s) => (
+              <SaleCard key={s.id} sale={s} />
             ))}
           </SearchResultsContainer>
           {searchResponse?.sales.length < searchResponse.resultCount && (

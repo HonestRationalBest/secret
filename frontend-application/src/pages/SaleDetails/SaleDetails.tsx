@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 export const SaleDetails: React.FC = () => {
   const params = useParams();
   const id: string = params.id ?? "";
-  const { handleToggleFavorite, isInFavorites, loading, error, sale, userId } =
+  const { handleToggleFavorite, isFavorite, loading, error, sale, userId } =
     useFavorites(id);
 
   useGetFavorites();
@@ -37,7 +37,7 @@ export const SaleDetails: React.FC = () => {
           {userId && (
             <ButtonWrapper>
               <Button onClick={handleToggleFavorite}>
-                {isInFavorites ? "Remove from favorite" : "Add to favorite"}
+                {isFavorite ? "Remove from favorite" : "Add to favorite"}
               </Button>
             </ButtonWrapper>
           )}

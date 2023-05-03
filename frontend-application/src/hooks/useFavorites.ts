@@ -12,7 +12,6 @@ export const useFavorites = (id: string) => {
     dispatch,
   } = useItemsContext();
 
-
   const { loading, error, sale } = useFetchSale({ saleId: id });
 
   const { userId } = useUserContext();
@@ -21,6 +20,7 @@ export const useFavorites = (id: string) => {
     () => favorites[userId]?.some((favorite) => favorite.id === id) ?? false,
     [favorites, id, userId]
   );
+  const [isFavorite, setIsFavorite] = React.useState(isInFavorites);
 
   const removeFavorite = async () => {
     try {
@@ -53,16 +53,18 @@ export const useFavorites = (id: string) => {
   };
 
   const handleToggleFavorite = async () => {
-    if (isInFavorites) {
+    if (isFavorite) {
       removeFavorite();
+      setIsFavorite(false);
     } else {
       addFavorite();
+      setIsFavorite(true);
     }
   };
 
   return {
     handleToggleFavorite,
-    isInFavorites,
+    isFavorite,
     loading,
     error,
     sale,

@@ -15,7 +15,7 @@ export interface ISaleCardProps {
 }
 
 export const SaleCard: React.FC<ISaleCardProps> = ({ sale }) => {
-  const { handleToggleFavorite, isInFavorites, userId } = useFavorites(sale.id);
+  const { handleToggleFavorite, isFavorite, userId } = useFavorites(sale.id);
 
   return (
     <SaleCardWrapper>
@@ -31,7 +31,7 @@ export const SaleCard: React.FC<ISaleCardProps> = ({ sale }) => {
         <TitleText>{sale?.editorial?.title}</TitleText>
         {userId && (
           <FavoriteButton onClick={() => handleToggleFavorite()}>
-            {isInFavorites ? "Remove from favorites" : "Add to favorites"}
+            {isFavorite ? "Remove from favorites" : "Add to favorites"}
           </FavoriteButton>
         )}
       </SaleCardContent>
